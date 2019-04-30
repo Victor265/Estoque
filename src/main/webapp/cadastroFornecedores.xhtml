@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="layout" name="css/cadastroFornecedor.css" />
+	<title>Cadastro de Fornecedores</title>
+
+</h:head>
+<h:body>
+	<header>
+		<div>
+			<p:messages autoUpdate="true" closable="true" />
+			<h1>Cadastro de Fornecedores</h1>
+		</div>
+	</header>
+	
+	<h:form id="frm1">
+	<p:button value="Voltar" outcome="home.xhtml" style="margin:10px" />
+	<div align="left" class="ui-fluid,panelgrid">
+		<p:panelGrid columns="2" style="width:100%" columnClasses="colunas,ui-grid-col-2, ui-grid-col-4, 
+		ui-grid-col-2, ui-grid-col-4" layout="grid" styleClass="panelgrid-noborder">
+
+			<p:outputLabel value="CNPJ:" for="cnpj" />
+			<p:inputMask mask="99.999.999/9999-99" id="cnpj" size="20"
+				value="#{fornecedorBean.fornecedor.cnpj}" maxlength="20" required="true"/>
+
+			<p:outputLabel value="Nome Fantasia:" for="nomeFantasia" />
+			<p:inputText id="nomeFantasia" size="20"
+				value="#{fornecedorBean.fornecedor.nomeFantasia}" maxlength="40" required="true"/>
+
+			<p:outputLabel value="Razão Social:" for="razaoSocial" />
+			<p:inputText id="razaoSocial" size="40"
+				value="#{fornecedorBean.fornecedor.razaoSocial}" maxlength="60" required="true"/>
+
+			<p:outputLabel value="Cep:" for="cep" />
+			<p:inputMask mask="99999-999" id="cep" size="10"
+				value="#{fornecedorBean.fornecedor.cep}" maxlength="10" required="true"/>
+
+			<p:outputLabel value="Endereço:" for="endereco" />
+			<p:inputText id="endereco" size="30"
+				value="#{fornecedorBean.fornecedor.endereco}" maxlength="40" required="true"/>
+
+			<p:outputLabel value="Bairro:" for="bairro" />
+			<p:inputText id="bairro" size="20"
+				value="#{fornecedorBean.fornecedor.bairro}" maxlength="40" required="true"/>
+
+			<p:outputLabel value="Cidade:" for="cidade" />
+			<p:inputText id="cidade" size="20"
+				value="#{fornecedorBean.fornecedor.cidade}" maxlength="40" required="true"/>
+
+			<p:outputLabel value="Estado:" for="estado" />
+			<p:inputText id="estado" size="2"
+				value="#{fornecedorBean.fornecedor.estado}" maxlength="2" required="true"/>
+
+			<p:outputLabel value="Número:" for="numero" />
+			<p:inputText id="numero" size="10"
+				value="#{fornecedorBean.fornecedor.numero}" maxlength="15" required="true"/>
+
+			<p:outputLabel value="Telefone:" for="telefone" />
+			<p:inputMask mask="(99)9999-9999" id="telefone" size="20"
+				value="#{fornecedorBean.fornecedor.telefone}" maxlength="20" required="true"/>
+		</p:panelGrid>
+		</div>
+		<div align="center">
+			<p:commandButton value="Cadastrar" styleClass="btCadastrar" update="@form"
+				action="#{fornecedorBean.salvar}" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

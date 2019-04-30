@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="layout" name="css/consultarCompras.css" />
+	<h:outputScript target="dataCompra" library="layout" name="javaScript/calendario.js" />
+	<title>Consultar Compras</title>
+</h:head>
+<h:body>
+	<header>
+	<div>
+		<h1>Consultar Compras</h1>
+		<p:messages autoUpdate="true" closable="true" />
+	</div>
+	</header>
+	<h:form id="frm1">
+
+		<p:button value="Voltar" outcome="home.xhtml" style="margin:10px"/>
+
+		<p:commandButton value="Consultar"
+			actionListener="#{consultaCompraFilterBean.pesquisar}"
+			update="frm1:compra-table" process="@form" />
+			
+		<p:commandButton value="Listar Todos" update="frm1:compra-table"
+			actionListener="#{consultaCompraFilterBean.listarTodosProdutos}" process="@form"/>
+
+		<p:panelGrid columns="2" columnClasses="colunas"
+			style="margin-top:20px">
+
+			<p:outputLabel value="Data da Compra" for="dataCompra" />
+				<p:calendar value="#{consultaCompraFilterBean.filtro.dataCompra}"
+						id="dataCompra"  pattern="dd/MM/yyyy"
+						readonlyInput="true"
+						navigator="true" locale="pt" />
+		</p:panelGrid>
+		
+		<p:dataTable id="compra-table" var="compra" style="margin-top:20px"
+			emptyMessage="Nenhuma compra encontrada" rows="20" paginator="true"
+			paginatorAlwaysVisible="false" paginatorPosition="bottom"
+			value="#{consultaCompraFilterBean.compras}" reflow="true">
+		
+		<p:column headerText="Número da Compra">
+			<h:outputText value="#{compra.idCompra}"/>
+		</p:column>
+		
+		<p:column headerText="Data da Compra">
+			<h:outputText value="#{compra.dataCompra}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+		</p:column>
+		
+		<p:column headerText="Valor da Compra">
+			<h:outputText value="#{compra.valorTotal}">
+			<f:convertNumber type="currency" locale="pt_BR"/>
+			 </h:outputText>
+		</p:column>
+		
+		<p:column headerText="Forma de Pagamento">
+			<h:outputText value="#{compra.formaPagamento}"/>
+		</p:column>
+		
+		<p:column headerText="Ações" width="170">
+		
+				<p:commandButton icon="ui-icon-trash" value="Excluir" update="frm1:compra-table @form"
+					actionListener="#{consultaCompraFilterBean.excluir(compra)}" process="@this" >
+				</p:commandButton>
+				
+				<p:button icon="ui-icon-pencil" value="Alterar" update="@form"
+					 outcome="novaCompra">
+					<f:param value="#{compra.idCompra}" name="idCompra" />
+				</p:button>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

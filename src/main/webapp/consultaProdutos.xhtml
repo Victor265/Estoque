@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="layout" name="css/consultaProduto.css" />
+	<title>Consulta de Produtos</title>
+
+</h:head>
+<h:body>
+	<header>
+		<div>
+			<h1>Consulta de Produtos</h1>
+		</div>
+	</header>
+	<p:button value="Voltar" outcome="home.xhtml" style="margin:10px"/>
+	<h:form id="frm1">
+		<p:messages autoUpdate="true" closable="true" />
+		<p:dataTable id="produto-table" var="produto" style="margin-top:20px"
+			emptyMessage="Nenhum produto encontrado" rows="20" paginator="true"
+			paginatorAlwaysVisible="false" paginatorPosition="bottom"
+			value="#{consultaProdutoBean.produtos}" reflow="true">
+
+			<p:column headerText="Código do Produto">
+				<h:outputText value="#{produto.idProduto}" />
+			</p:column>
+
+			<p:column headerText="Código de Barras">
+				<h:outputText value="#{produto.codigo_Barra}" />
+			</p:column>
+
+			<p:column headerText="Fornecedor">
+				<h:outputText value="#{produto.fornecedor.nomeFantasia}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{produto.nome}" />
+			</p:column>
+
+			<p:column headerText="Preço">
+				<h:outputText value="#{produto.preco}" >
+				<f:convertNumber type="currency" locale="pt_BR"/>
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Tipo">
+				<h:outputText value="#{produto.tipo.descricao}" />
+			</p:column>
+
+			<p:column headerText="Descrição">
+				<h:outputText value="#{produto.descricao}" />
+			</p:column>
+
+			<p:column headerText="Ações" width="170">
+				<p:commandButton icon="ui-icon-trash" value="Excluir" update="@form"
+					action="${consultaProdutoBean.excluir}">
+					<f:setPropertyActionListener value="#{produto}"
+						target="#{consultaProdutoBean.produtoSelecionado}" />
+				</p:commandButton>
+				<p:button icon="ui-icon-pencil" value="Alterar" update="@form"
+					 outcome="cadastroProduto">
+					<f:param value="#{produto.idProduto}" name="idProduto" />
+					<f:param value="#{produto.fornecedor.idFornecedor}" name="fornecedor" />
+				</p:button>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

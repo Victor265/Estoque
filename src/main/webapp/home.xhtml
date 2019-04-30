@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="layout" name="css/home.css" />
+	<title>Inicio</title>
+	<div>
+		<h:form>
+			<p:menubar>
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Cadastro de Produto" outcome="cadastroProduto.xhtml" />
+					<p:menuitem value="Cadastro de Fornecedores" outcome="cadastroFornecedores.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="Consultas">
+					<p:menuitem value="Consulta de Produtos" outcome="consultaProdutos.xhtml" />
+					<p:menuitem value="Consulta de Fornecedores" outcome="consultaFornecedores.xhtml" />
+					<p:menuitem value="Consultar Estoque" outcome="consultaEstoque.xhtml"/>
+				</p:submenu>
+
+				<p:submenu label="Estoque">
+					<p:menuitem value="Entrada de estoque" outcome="entradaEstoque.xhtml"/>
+					<p:menuitem value="Saída de Estoque" outcome="saidaEstoque.xhtml"/>
+				</p:submenu>
+				
+				<p:submenu label="Compras">
+					<p:menuitem value="Nova Compra" outcome="novaCompra.xhtml"/>
+					<p:menuitem value="Consultar Compra" outcome="consultarCompras.xhtml"/>
+				</p:submenu>
+			</p:menubar>
+
+		</h:form>
+	</div>
+</h:head>
+<h:body>
+
+</h:body>
+</html>

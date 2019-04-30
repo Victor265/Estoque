@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+header{
+	background-color: #4B0082;
+	top:0px;
+	bottom: 0px;
+	width:100%;
+	padding:10px;
+	margin: auto;
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+body,html {
+	margin:0px;
+	padding:0px;
+	background-color: white;
+}
+
+h1{
+	text-align:center;
+	color: white
+}
+
+.ui-widget{
+	font-size:0.8em;
+}
+
+.ui-panelgrid td {
+    background-color: white;
+    border: none !important;
+    
+}
+
+.ui-panelgrid tr{
+	border:none !important;
+}
+
+.colunas{
+	color:black;
+	width:150px;
+}

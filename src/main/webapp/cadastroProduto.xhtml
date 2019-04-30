@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="
+	Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cadastro de Produtos</title>
+	<h:outputStylesheet library="layout" name="css/cadastroProduto.css" />
+
+
+</h:head>
+<h:body>
+	<header>
+		<div>
+			<h1>Cadastro de Produtos</h1>
+			<p:messages autoUpdate="true" closable="true" />
+		</div>
+	</header>
+	<h:form id="frm1">
+	<p:button value="Voltar" outcome="home.xhtml" style="margin:10px" />
+	<div class="ui-fluid,panelgrid" align="left">
+		<p:panelGrid columns="2" style="width:100%" columnClasses=" ui-grid-col-2, ui-grid-col-4, 
+		ui-grid-col-2, ui-grid-col-4, colunas" layout="grid" styleClass="panelgrid-noborder">
+
+			<p:outputLabel value="Código de Barras:" for="cod_Barras" />
+			<p:inputText id="cod_Barras" size="20"
+				value="#{produtoBean.produto.codigo_Barra}" required="true" />
+
+			<p:outputLabel value="Nome:" for="nome" />
+			<p:inputText id="nome" size="20" value="#{produtoBean.produto.nome}"
+				required="true" />
+
+			<p:outputLabel value="Categoria:" for="categoria" />
+			<p:selectOneMenu id="categoria"
+				value="#{produtoBean.produto.tipo}" required="true" layout="responsive">
+				<f:selectItem itemLabel="Selecione a Categoria"/>
+				<f:selectItems value="#{produtoBean.tipos}" var="categoriaProduto" 
+				itemValue="#{categoriaProduto}" itemLabel="#{categoriaProduto.descricao}"/>
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Preço:" for="preco" />
+			<p:inputText id="preco" size="10"
+				value="#{produtoBean.produto.preco}" required="true" />
+				
+			<p:outputLabel value="Fornecedor:" for="fornecedor" />
+			<p:selectOneMenu id="fornecedor"
+				value="#{produtoBean.produto.fornecedor}" required="true" layout="responsive">
+				<f:selectItem itemLabel="Selecione o Fornecedor" />
+				<f:selectItems value="#{produtoBean.fornecedores}" var="fornecedor"
+					itemValue="#{fornecedor}" itemLabel="#{fornecedor.nomeFantasia}" />
+
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Descrição:" for="descricao" />
+			<p:inputTextarea id="descricao"
+				value="#{produtoBean.produto.descricao}" cols="90" rows="4"
+				autoResize="true" required="true"/>
+		</p:panelGrid>
+		</div>
+		<div align="center">
+		<p:commandButton value="Cadastrar" styleClass="btCadastrar" update="@form"
+				action="#{produtoBean.salvar}" />
+	</div>
+	</h:form>
+</h:body>
+</html>

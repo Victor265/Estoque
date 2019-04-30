@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="layout" name="css/consultaFornecedor.css" />
+	<title>Consulta de Fornecedores</title>
+
+</h:head>
+<h:body>
+<header>
+	<div>
+		<h1>Consulta de Fornecedores</h1>
+	</div>
+</header>
+	<p:button value="Voltar" outcome="home.xhtml" style="margin:10px"/>
+	<h:form id="frm1">
+		<p:messages autoUpdate="true" closable="true" />
+		<p:dataTable id="fornecedor-table" var="fornecedor"
+			style="margin-top:20px" emptyMessage="Nenhum fornecedor encontrado"
+			rows="20" paginator="true" paginatorAlwaysVisible="false"
+			paginatorPosition="bottom" reflow="true"
+			value="#{consultaFornecedorBean.fornecedores}">
+
+			<p:column headerText="Código do Fornecedor">
+				<h:outputText value="#{fornecedor.idFornecedor}" />
+			</p:column>
+
+			<p:column headerText="CNPJ">
+				<h:outputText value="#{fornecedor.cnpj}" />
+			</p:column>
+
+			<p:column headerText="Nome Fantasia">
+				<h:outputText value="#{fornecedor.nomeFantasia}" />
+			</p:column>
+
+			<p:column headerText="Razão Social">
+				<h:outputText value="#{fornecedor.razaoSocial}" />
+			</p:column>
+
+			<p:column headerText="CEP">
+				<h:outputText value="#{fornecedor.cep}" />
+			</p:column>
+
+			<p:column headerText="Endereço">
+				<h:outputText value="#{fornecedor.endereco}" />
+			</p:column>
+
+			<p:column headerText="Bairro">
+				<h:outputText value="#{fornecedor.bairro}" />
+			</p:column>
+
+			<p:column headerText="Cidade">
+				<h:outputText value="#{fornecedor.cidade}" />
+			</p:column>
+
+			<p:column headerText="Estado">
+				<h:outputText value="#{fornecedor.estado}"/>			
+			</p:column>
+			
+			<p:column headerText="Número">
+				<h:outputText value="#{fornecedor.numero}" />
+			</p:column>
+			<p:column headerText="Telefone">
+				<h:outputText value="#{fornecedor.telefone}" />
+			</p:column>
+
+			<p:column headerText="Ações" width="170">
+				<p:commandButton icon="ui-icon-trash" value="Excluir" update="@form"
+					action="${consultaFornecedorBean.excluir}">
+					<f:setPropertyActionListener value="#{fornecedor}"
+						target="#{consultaFornecedorBean.fornecedorSelecionado}" />
+				</p:commandButton>
+				<p:button icon="ui-icon-pencil" value="Alterar" update="@form"
+					 outcome="cadastroFornecedores">
+					<f:param value="#{fornecedor.idFornecedor}"
+						name="idFornecedor" />
+				</p:button>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

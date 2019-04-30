@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<h:outputStylesheet library="layout" name="css/entradaEstoque.css" />
+<title>Entrada de Estoque</title>
+</h:head>
+<h:body>
+	<header>
+		<div>
+			<h1> Entrada de Estoque</h1>
+		</div>
+	</header>
+	
+	<p:button value="Voltar" outcome="home.xhtml" style="margin:10px"/>
+	
+	<h:form id="frm1">
+		<p:messages autoUpdate="true" closable="true" />
+		<div align="left" class="panelgrid,ui-fluid">
+			<p:panelGrid columns="2" style="width:100%" columnClasses="colunas,ui-grid-col-2, ui-grid-col-4, 
+		ui-grid-col-2, ui-grid-col-4" layout="grid" styleClass="panelgrid-noborder">
+			
+				<p:outputLabel value="Fornecedor" for="fornecedor"/>
+				<p:selectOneMenu id="fornecedor" required="true" value="#{entradaEstoqueBean.fornecedorSelecionado}">
+				<f:selectItem itemLabel="Selecione o Fornecedor" />
+				<f:selectItems value="#{entradaEstoqueBean.fornecedores}" var="fornecedor"
+					itemValue="#{fornecedor}" itemLabel="#{fornecedor.nomeFantasia}" />
+				<p:ajax event="itemSelect" process="@this" update="@form" />
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="Produto" for="produto"/>
+			<p:selectOneMenu id="produto" required="true" value="#{entradaEstoqueBean.produtoSelecionado}">
+			<f:selectItem itemLabel="Selecione o Produto"/>
+			<f:selectItems value="#{entradaEstoqueBean.produtos}" var="produto"
+			itemValue="#{produto}" itemLabel="#{produto.nome}"/>
+			<p:ajax event="itemSelect" process="@this"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="Quantidade" for="quantidade"/>
+			<p:inputText id="quantidade" required="true" size="10" value="#{entradaEstoqueBean.aumentarQuantidade}"/>
+			</p:panelGrid>
+			</div>
+			
+			<div align="left">
+			<p:commandButton value="Lançar" styleClass="btLancar" update="@form" 
+			actionListener="#{entradaEstoqueBean.lancar}" process="@form"/>
+		</div>
+	</h:form>
+</h:body>
+</html>

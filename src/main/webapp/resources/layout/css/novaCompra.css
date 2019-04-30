@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+header{
+	background-color: #4B0082;
+	top:0px;
+	bottom: 0px;
+	width:100%;
+	padding:10px;
+	margin: auto;
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+body,html {
+	margin:0px;
+	padding:0px;
+	background-color: white;
+}
+
+h1{
+	text-align:center;
+	color: white
+}
+
+.ui-panelgrid td {
+    background-color: white;
+    border: none !important;
+    
+}
+
+.ui-panelgrid tr{
+	border:none !important;
+}
+
+.colunas{
+	color:black;
+	width:150px !important;
+}
+
+.btSalvar{
+	top:15px;
+	left:190px;
+}
+
+.ui-widget-content{
+	border:none !important;	
+}
+
+.panelgrid{
+	margin:auto 299px;
+}
+
+.ui-widget{
+	font-size:1.0em;
+}
+
+.ui-state-default{
+	font-size:0.8em;
+}
+
+.produto-tabela input {
+	width: 99%;
+}
+
+.ui-panelgrid .ui-grid-responsive .ui-panelgrid-cell {
+	text-align: center;
+}
+
+@media(max-width:1049px ){
+	.btCadastrar{
+		left:5px;
+	}
+	
+	.ui-panelgrid .ui-grid-responsive .ui-grid-row {
+		border:none !important;
+	}
+}

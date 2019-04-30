@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="layout" name="css/novaCompra.css" />
+	<title>Nova Compra</title>
+</h:head>
+<h:body>
+	<header>
+	<div>
+		<h1>Nova Compra</h1>
+		<p:messages autoUpdate="true" closable="true" />
+	</div>
+	</header>
+
+	<h:form id="frm1">
+		<p:button value="Voltar" outcome="home.xhtml" style="margin:10px; padding: 0.5em 1em !important" />
+		<div align="center" class="panelgrid,ui-fluid">
+			<p:panelGrid columns="2" style="width:100%" columnClasses="colunas,ui-grid-col-2, ui-grid-col-4, 
+		ui-grid-col-2, ui-grid-col-4" layout="grid" styleClass="panelgrid-noborder">
+
+				<p:outputLabel value="Data da Compra" for="dataCompra"
+					rendered="#{!compraBean.compra.existente}" />
+				<h:outputText value="#{compraBean.compra.dataCompra}"
+					id="dataCompra" rendered="#{!compraBean.compra.existente}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+
+				<p:outputLabel value="Forma de Pagamento" for="pagamento" />
+				<p:selectOneMenu id="pagamento"
+					value="#{compraBean.compra.formaPagamento}" required="true">
+					<f:selectItem itemLabel="Selecione a Forma de Pagamento" />
+					<f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
+					<f:selectItem itemLabel="Cartão de Crédito 5x" itemValue="Cartao de Credito 5x" />
+					<f:selectItem itemLabel="Cartão de Crédito 10x" itemValue="Cartao de Credito 10x" />
+					<f:selectItem itemLabel="Cartão de Crédito 12x" itemValue="Cartao de Credito 12x" />
+					<f:selectItem itemLabel="Cartão de Débito" itemValue="Cartao de Debito"/>
+					<f:selectItem itemLabel="Cheque" itemValue="Cheque" />
+				</p:selectOneMenu>
+					
+				<p:outputLabel value="Valor Total" for="valorTotal"/>
+				<h:outputText  id="valorTotal" value="#{compraBean.compra.valorTotal}">
+					<f:convertNumber type="currency"/>
+				</h:outputText>
+				</p:panelGrid>
+				</div>
+				
+				<div align="left">
+				<p:commandButton value="Efetuar"
+					actionListener="#{compraBean.salvar}" update="@form"
+					process="@form" styleClass="btSalvar" />
+		</div>
+		
+		<p:dataTable id="item-table" var="item" rowIndexVar="linha" style="margin-top:20px"
+			emptyMessage="Nenhum produto adicionado" rows="20" paginator="true"
+			paginatorAlwaysVisible="false" paginatorPosition="bottom"
+			value="#{compraBean.compra.itens}" reflow="true">
+			
+			<p:column headerText="Produto">
+				<h:outputText value="#{item.produto.nome}" rendered="#{item.produtoAssociado}"/>
+			
+				<p:autoComplete size="50" value="#{compraBean.produtoLinhaEditavel}"
+				completeMethod="#{compraBean.completarProduto}"
+				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"
+				forceSelection="true" rendered="#{not item.produtoAssociado}">
+				<p:ajax event="itemSelect" update="item-table :frm1:valorTotal"
+				listener="#{compraBean.carregarProdutoLinhaEditavel}"/>
+				</p:autoComplete>
+			</p:column>
+			
+			<p:column headerText="Quantidade">
+				<h:inputText size="8" value="#{item.quantidade}">
+				<p:ajax event="change" process="@this"
+				update="item-table :frm1:valorTotal"
+				listener="#{compraBean.atualizarQuantidade(item, linha)}"/>
+				</h:inputText>
+			</p:column>
+			
+			<p:column headerText="Preço">
+				<h:outputText value="#{item.valorUnitario}">
+					<f:convertNumber type="currency"/>
+				</h:outputText>
+			</p:column>
+			</p:dataTable>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="layout" name="css/consultaEstoque.css" />
+	<title>Consultar Estoque</title>
+
+</h:head>
+<h:body>
+	<header>
+		<div>
+			<h1>Consultar Estoque</h1>
+		</div>
+	</header>
+		
+	<h:form id="frm1">
+		<p:messages autoUpdate="true" closable="true" />
+		<p:commandButton value="Consultar" update="frm1:estoque-table"
+			actionListener="#{consultaEstoqueFilterBean.pesquisar}"  process="@form"/>
+			
+		<p:commandButton value="Listar Todos" update="frm1:estoque-table"
+			actionListener="#{consultaEstoqueFilterBean.listarTodosProdutos}" process="@form"/>
+			
+		<p:button value="Voltar" outcome="home.xhtml" style="margin:10px"/>
+		
+		<p:panelGrid columns="2" style="margin-top:20px" columnClasses="colunas">
+			<p:outputLabel value="Código do Produto" for="cod_prod" />
+			<p:inputText id="cod_prod" size="30" value="#{consultaEstoqueFilterBean.filtro.idEstoque}" />
+
+			<p:outputLabel value="Nome do Produto" for="produto" />
+			<p:inputText id="produto" size="30" value="#{consultaEstoqueFilterBean.filtro.nome}" />
+
+			<p:outputLabel value="Fornecedor" for="fornecedor" />
+			<p:inputText id="fornecedor" size="40"
+				value="#{consultaEstoqueFilterBean.filtro.nomeFantasia}" />
+		</p:panelGrid>
+		
+		<p:dataTable id="estoque-table" var="estoque" style="margin-top:20px"
+			emptyMessage="Nenhum produto encontrado" rows="20" paginator="true"
+			paginatorAlwaysVisible="false" paginatorPosition="bottom"
+			value="#{consultaEstoqueFilterBean.estoques}" reflow="true">
+
+			<p:column headerText="Código do Produto">
+				<h:outputText value="#{estoque.idEstoque}" />
+			</p:column>
+
+			<p:column headerText="Produto">
+				<h:outputText value="#{estoque.produto.nome}" />
+			</p:column>
+
+			<p:column headerText="Fornecedor">
+				<h:outputText value="#{estoque.fornecedor.nomeFantasia}" />
+			</p:column>
+
+			<p:column headerText="Quantidade Disponível">
+				<h:outputText value="#{estoque.quantidade}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
